@@ -18,7 +18,6 @@
 </template>
 
 <script>
-/*import axios from 'axios'*/
 export default {
   name: 'login',
   data () {
@@ -55,11 +54,10 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-         /* this.sendMessage()*/
           this.openSuccess()
           setTimeout(() => {
-            this.$router.push({path:'/main'});
-          },3000)
+            this.$router.push({path: '/home'})
+          }, 3000)
         } else {
           return false
         }
@@ -83,10 +81,7 @@ export default {
         type: 'error',
         center: true
       })
-    },
-   /* sendMessage () {
-      axios.get('?name=' + this.name +'?pass' + this.pass)
-    }*/
+    }
   }
 }
 </script>
