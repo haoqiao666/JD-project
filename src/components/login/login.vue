@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'login',
   data () {
@@ -41,7 +42,6 @@ export default {
       rules: {
         name: [
           { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' },
-          { message: '请输入活动名称', trigger: 'blur' },
           {validator: validateName, trigger: 'blur'}
         ],
         pass: [
@@ -54,12 +54,11 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.openSuccess()
-          setTimeout(() => {
-            this.$router.push({path: '/home'})
-          }, 3000)
-        } else {
-          return false
+          let useData = {
+            name: this.ruleForm.name,
+            password: this.ruleForm.pass
+          }
+          this.getUseMessage(useData)
         }
       })
     },
@@ -77,10 +76,29 @@ export default {
     openError () {
       this.$message({
         showClose: true,
-        message: '登录失败',
+        message: '用户名或密码错误',
         type: 'error',
-        center: true
+        center: true,
+        duration: 2000
       })
+    },
+    getUseMessage (data) {
+      axios.get('/api/usermessage.json', data)
+        .then(res => {
+          let resD = res.data
+          if (resD.name === data.name && resD.password === data.password) {
+            this.openSuccess()
+            setTimeout(() => {
+              this.$router.push({path: '/home'})
+            }, 3000)
+          } else {
+            this.openError()
+            return false
+          }
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     }
   }
 }

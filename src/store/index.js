@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    topHeight: ''
+    mainHeight: ''
   },
   actions: {
     defautHeight (ctx, defaultHeight) {
@@ -14,8 +14,7 @@ export default new Vuex.Store({
   },
   mutations: {
     defautHeight2 (state, defaultHeight) {
-      state.topHeight = defaultHeight
-      console.log(defaultHeight)
+      state.mainHeight = defaultHeight
     }
   }
 })

@@ -9,13 +9,13 @@
       <el-main class="el-main">
         <el-row :gutter="20">
           <el-col :span="8"><div class="grid-content bg-purple">
-            <home-left :ecDataL="ecDataL"></home-left>
+            <home-left></home-left>
           </div></el-col>
           <el-col :span="8"><div class="grid-content bg-purple">
-            <home-mid :ecDataM="ecDataM"></home-mid>
+            <home-mid></home-mid>
           </div></el-col>
           <el-col :span="8"><div class="grid-content bg-purple">
-            <home-right :ecDataR="ecDataR"></home-right>
+            <home-right></home-right>
           </div></el-col>
         </el-row>
       </el-main>
@@ -28,7 +28,6 @@ import HomeTop from './parts/hometop'
 import HomeLeft from './parts/mainleft'
 import HomeMid from './parts/mainmid'
 import HomeRight from './parts/mainright'
-import axios from 'axios'
 export default {
   name: 'home',
   components: {
@@ -40,10 +39,7 @@ export default {
   data () {
     return {
       clientHeight: '',
-      topHeight: '',
-      ecDataL: '',
-      ecDataM: '',
-      ecDataR: ''
+      topHeight: ''
     }
   },
   mounted () {
@@ -51,28 +47,16 @@ export default {
     document.querySelector('.con-bg').style.height = this.clientHeight + 'px'
     this.mainHeight = this.clientHeight - this.topHeight
     document.querySelector('.el-main').style.height = this.mainHeight + 'px'
-    this.getHomeInfo()
     var defaultHeight = this.mainHeight
     this.$store.dispatch('defautHeight', defaultHeight)
-   /* this.$store.commit('defautHeight',defaultHeight)*/
   },
   methods: {
     getMsgFormSon (data) {
       this.topHeight = data
-    },
-    getHomeInfo () {
-      axios.get('/api/home.json')
-        .then(this.getHomeInfoSucc)
-    },
-    getHomeInfoSucc (res) {
-      res = res.data
-      if (res.res && res.data) {
-        this.ecDataL = res.data.ecData0
-        console.log(this.ecDataL)
-      }
     }
   }
 }
+
 </script>
 
 <style lang="stylus" scoped>

@@ -1,5 +1,9 @@
 <template>
-<h1>llll</h1>
+  <router-link to="/home">
+    <div class="nav-logo">
+      LOGO
+    </div>
+  </router-link>
 </template>
 
 <script>

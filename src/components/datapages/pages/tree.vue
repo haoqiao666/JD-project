@@ -61,9 +61,10 @@ export default {
     }
   },
   mounted () {
-    document.querySelector('.tree-bg').style.height = this.$store.state.topHeight + 'px'
+    document.querySelector('.tree-bg').style.height = this.$store.state.mainHeight + 'px'
   }
 }
+
 </script>
 
 <style lang="stylus" scoped>
